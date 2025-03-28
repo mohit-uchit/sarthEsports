@@ -55,22 +55,22 @@ function TournamentCountdown() {
   });
   
   return (
-    <div className="ff-countdown mt-8">
-      <div className="ff-countdown-item">
-        <span className="ff-countdown-number">{timeLeft.days}</span>
-        <span className="ff-countdown-label">Days</span>
+    <div className="ff-countdown mt-8 flex-wrap justify-center">
+      <div className="ff-countdown-item min-w-[60px] sm:min-w-[70px]">
+        <span className="ff-countdown-number text-base sm:text-lg md:text-xl">{timeLeft.days}</span>
+        <span className="ff-countdown-label text-[10px] sm:text-xs">Days</span>
       </div>
-      <div className="ff-countdown-item">
-        <span className="ff-countdown-number">{timeLeft.hours}</span>
-        <span className="ff-countdown-label">Hours</span>
+      <div className="ff-countdown-item min-w-[60px] sm:min-w-[70px]">
+        <span className="ff-countdown-number text-base sm:text-lg md:text-xl">{timeLeft.hours}</span>
+        <span className="ff-countdown-label text-[10px] sm:text-xs">Hours</span>
       </div>
-      <div className="ff-countdown-item">
-        <span className="ff-countdown-number">{timeLeft.minutes}</span>
-        <span className="ff-countdown-label">Minutes</span>
+      <div className="ff-countdown-item min-w-[60px] sm:min-w-[70px]">
+        <span className="ff-countdown-number text-base sm:text-lg md:text-xl">{timeLeft.minutes}</span>
+        <span className="ff-countdown-label text-[10px] sm:text-xs">Minutes</span>
       </div>
-      <div className="ff-countdown-item">
-        <span className="ff-countdown-number">{timeLeft.seconds}</span>
-        <span className="ff-countdown-label">Seconds</span>
+      <div className="ff-countdown-item min-w-[60px] sm:min-w-[70px]">
+        <span className="ff-countdown-number text-base sm:text-lg md:text-xl">{timeLeft.seconds}</span>
+        <span className="ff-countdown-label text-[10px] sm:text-xs">Seconds</span>
       </div>
     </div>
   );
@@ -151,10 +151,12 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            <h2 className="text-2xl md:text-3xl font-audiowide mb-4 text-center text-game-accent">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-audiowide mb-4 text-center text-game-accent">
               TOURNAMENT COUNTDOWN
             </h2>
-            <TournamentCountdown />
+            <div className="px-2 overflow-x-auto w-full">
+              <TournamentCountdown />
+            </div>
           </motion.div>
           
           <TournamentDetails />

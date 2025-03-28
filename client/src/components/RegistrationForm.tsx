@@ -280,12 +280,12 @@ export default function RegistrationForm() {
                 
                 {/* Submit Button */}
                 <motion.div 
-                  className="mt-8"
+                  className="mt-6 sm:mt-8"
                   variants={itemAnimation}
                 >
                   <motion.button 
                     type="submit" 
-                    className="w-full relative overflow-hidden group bg-gradient-to-r from-game-accent to-red-700 text-white font-orbitron text-lg py-4 rounded transition-all disabled:opacity-70"
+                    className="w-full relative overflow-hidden group bg-gradient-to-r from-game-accent to-red-700 text-white font-orbitron text-base sm:text-lg py-3 sm:py-4 rounded transition-all disabled:opacity-70"
                     disabled={isPending}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -302,7 +302,7 @@ export default function RegistrationForm() {
                         </>
                       ) : (
                         <>
-                          REGISTER FOR TOURNAMENT
+                          <span className="text-sm sm:text-base">REGISTER FOR TOURNAMENT</span>
                           <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="m12 5 7 7-7 7"></path>

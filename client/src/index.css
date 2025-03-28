@@ -364,8 +364,14 @@
   /* Free Fire Countdown Timer */
   .ff-countdown {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     justify-content: center;
+  }
+  
+  @media (min-width: 640px) {
+    .ff-countdown {
+      gap: 1rem;
+    }
   }
   
   .ff-countdown-item {
@@ -373,13 +379,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 70px;
-    height: 70px;
+    min-width: 60px;
+    height: 60px;
     background: rgba(20, 20, 20, 0.8);
     border: 1px solid rgba(255, 87, 34, 0.3);
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+  }
+  
+  @media (min-width: 640px) {
+    .ff-countdown-item {
+      min-width: 70px;
+      height: 70px;
+    }
   }
   
   .ff-countdown-item::after {
@@ -393,14 +406,26 @@
   }
   
   .ff-countdown-number {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: bold;
     color: #FF5722;
   }
   
+  @media (min-width: 640px) {
+    .ff-countdown-number {
+      font-size: 1.5rem;
+    }
+  }
+  
   .ff-countdown-label {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     color: #AAAAAA;
+  }
+  
+  @media (min-width: 640px) {
+    .ff-countdown-label {
+      font-size: 0.75rem;
+    }
   }
   
   /* Free Fire animated section borders */

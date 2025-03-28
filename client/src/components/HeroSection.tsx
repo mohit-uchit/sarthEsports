@@ -142,7 +142,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <h1 className="font-audiowide text-5xl md:text-7xl text-white leading-tight">
+                <h1 className="font-audiowide text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight">
                   FREE FIRE
                 </h1>
                 <motion.div 
@@ -178,7 +178,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <h2 className="ff-glitch-text font-audiowide text-5xl md:text-7xl text-[#FF5722] leading-tight" data-text="SOLO BERMUDA">
+                <h2 className="ff-glitch-text font-audiowide text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-[#FF5722] leading-tight" data-text="SOLO BERMUDA">
                   SOLO BERMUDA
                 </h2>
                 <motion.div
@@ -200,14 +200,14 @@ export default function HeroSection() {
               </motion.div>
               
               <motion.h2 
-                className="font-audiowide text-4xl md:text-6xl text-[#00E5FF] leading-tight relative"
+                className="font-audiowide text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#00E5FF] leading-tight relative"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
                 TOURNAMENT
                 <motion.span 
-                  className="absolute -right-4 top-0 text-lg text-[#00E5FF]"
+                  className="absolute -right-3 sm:-right-4 top-0 text-sm sm:text-lg text-[#00E5FF]"
                   animate={{ opacity: [0, 1, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -217,7 +217,7 @@ export default function HeroSection() {
             </div>
             
             <motion.p 
-              className="text-xl text-gray-300 max-w-xl font-rajdhani"
+              className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl font-rajdhani"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}

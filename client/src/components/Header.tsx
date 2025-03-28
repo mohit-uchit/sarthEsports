@@ -66,7 +66,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center mb-4 md:mb-0 relative">
           <motion.div 
-            className="free-fire-logo h-16 w-16 mr-3 overflow-hidden rounded-lg"
+            className="free-fire-logo h-10 w-10 sm:h-14 sm:w-14 md:h-16 md:w-16 mr-2 sm:mr-3 overflow-hidden rounded-lg"
             variants={fireLogoAnimation}
             animate="animate"
           >
@@ -81,7 +81,7 @@ export default function Header() {
           </motion.div>
           
           <div>
-            <h1 className="font-audiowide text-2xl text-white">
+            <h1 className="font-audiowide text-lg sm:text-xl md:text-2xl text-white">
               <motion.span 
                 className="text-[#00E5FF] inline-block"
                 animate={{ 
@@ -103,7 +103,7 @@ export default function Header() {
             </h1>
             
             <div className="relative mt-1">
-              <p className="text-xs text-game-text-dim font-orbitron tracking-wider">FREE FIRE TOURNAMENT</p>
+              <p className="text-[10px] sm:text-xs text-game-text-dim font-orbitron tracking-wider">FREE FIRE TOURNAMENT</p>
               <motion.div 
                 className="h-[1px] bg-gradient-to-r from-transparent via-[#FF5722] to-transparent"
                 animate={{ scaleX: [0, 1, 0], x: ["-100%", "0%", "100%"] }}
