@@ -211,6 +211,259 @@
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
   }
+  
+  /* Free Fire Specific Components */
+  .free-fire-logo {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .free-fire-logo::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid rgba(255, 87, 34, 0.7);
+    opacity: 0;
+    animation: logo-pulse 2s infinite;
+  }
+  
+  /* Free Fire Hero Section */
+  .hero-ff-background {
+    position: relative;
+    background: linear-gradient(0deg, #000000 0%, #0F0F0F 100%);
+    overflow: hidden;
+  }
+  
+  .hero-ff-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FF5722' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                  url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300E5FF' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+    z-index: 0;
+  }
+  
+  /* Free Fire Battle Card */
+  .ff-battle-card {
+    position: relative;
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid rgba(255, 87, 34, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .ff-battle-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 87, 34, 0.1) 0%, transparent 40%, rgba(0, 229, 255, 0.1) 60%, transparent 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .ff-battle-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 87, 34, 0.7);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 87, 34, 0.3);
+  }
+  
+  .ff-battle-card:hover::before {
+    opacity: 1;
+    animation: cardGradient 2s ease infinite;
+  }
+  
+  /* Free Fire button styles */
+  .ff-button {
+    position: relative;
+    background: linear-gradient(to right, #FF5722, #FF8A65);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.4);
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  
+  .ff-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    z-index: -1;
+    transition: all 0.6s ease;
+  }
+  
+  .ff-button:hover::before {
+    left: 100%;
+  }
+  
+  .ff-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 87, 34, 0.6);
+  }
+  
+  /* Free Fire form inputs */
+  .ff-input {
+    background: rgba(25, 25, 25, 0.8);
+    border: 1px solid rgba(255, 87, 34, 0.2);
+    color: #E0E0E0;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .ff-input:focus {
+    box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.2);
+    border-color: #FF5722;
+    outline: none;
+  }
+  
+  /* Animated badges */
+  .ff-badge {
+    display: inline-block;
+    background: linear-gradient(45deg, #FF5722, #FF8A65);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ff-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shine 3s infinite linear;
+  }
+  
+  /* Free Fire Countdown Timer */
+  .ff-countdown {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .ff-countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    height: 70px;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 87, 34, 0.3);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ff-countdown-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FF5722, transparent);
+  }
+  
+  .ff-countdown-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FF5722;
+  }
+  
+  .ff-countdown-label {
+    font-size: 0.75rem;
+    color: #AAAAAA;
+  }
+  
+  /* Free Fire animated section borders */
+  .ff-section-border {
+    position: relative;
+    border: 1px solid rgba(255, 87, 34, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+  
+  .ff-section-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FF5722, transparent);
+    animation: borderFlow 3s infinite linear;
+  }
+  
+  .ff-section-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+    animation: borderFlowReverse 3s infinite linear;
+  }
+  
+  /* Free Fire animated glitch text */
+  .ff-glitch-text {
+    position: relative;
+    display: inline-block;
+    color: #E0E0E0;
+  }
+  
+  .ff-glitch-text::before,
+  .ff-glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .ff-glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #00E5FF;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+  }
+  
+  .ff-glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #FF5722;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 5s infinite linear alternate-reverse;
+  }
 }
 
 @layer utilities {
@@ -324,4 +577,53 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes borderFlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes borderFlowReverse {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes cardGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(24px, 450px, 36px, 0); }
+  20% { clip: rect(44px, 450px, 56px, 0); }
+  40% { clip: rect(64px, 450px, 76px, 0); }
+  60% { clip: rect(84px, 450px, 96px, 0); }
+  80% { clip: rect(104px, 450px, 116px, 0); }
+  100% { clip: rect(24px, 450px, 36px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(34px, 450px, 46px, 0); }
+  20% { clip: rect(54px, 450px, 66px, 0); }
+  40% { clip: rect(74px, 450px, 86px, 0); }
+  60% { clip: rect(94px, 450px, 106px, 0); }
+  80% { clip: rect(14px, 450px, 26px, 0); }
+  100% { clip: rect(34px, 450px, 46px, 0); }
+}
+
+@keyframes logo-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes flamePulse {
+  0%, 100% { box-shadow: 0 0 20px 5px rgba(255, 87, 34, 0.6); }
+  50% { box-shadow: 0 0 25px 10px rgba(255, 87, 34, 0.8); }
 }

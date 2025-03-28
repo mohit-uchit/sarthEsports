@@ -1,64 +1,263 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
-import logoPath from "../assets/logo.jpeg";
+import { motion, AnimatePresence } from "framer-motion";
+import logoPath from "../assets/images/logo.jpeg";
 
 export default function Header() {
+  // Mobile menu state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Scroll state for header animation
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
+  // Track scroll position for dynamic header styling
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  
+  // Animation for the nav items
+  const navVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.1 * i,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+  
+  // Fire animations for the logo
+  const fireLogoAnimation = {
+    animate: {
+      filter: ["drop-shadow(0 0 5px #FF5722) drop-shadow(0 0 10px #FF5722)", 
+               "drop-shadow(0 0 10px #FF5722) drop-shadow(0 0 20px #FF5722)", 
+               "drop-shadow(0 0 5px #FF5722) drop-shadow(0 0 10px #FF5722)"],
+      scale: [1, 1.03, 1],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+  
   return (
     <motion.header 
       initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{ 
+        opacity: 1, 
+        y: 0,
+        backgroundColor: scrollPosition > 50 ? "rgba(0, 0, 0, 0.9)" : "rgba(0, 0, 0, 0.7)",
+        backdropFilter: scrollPosition > 50 ? "blur(16px)" : "blur(8px)"
+      }}
       transition={{ duration: 0.5 }}
-      className="bg-black/80 backdrop-blur-sm sticky top-0 py-4 px-4 md:px-8 z-50 border-b border-game-accent/20"
+      className="sticky top-0 py-4 px-4 md:px-8 z-50 border-b border-[#FF5722]/30"
     >
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center mb-4 md:mb-0">
+        <div className="flex items-center mb-4 md:mb-0 relative">
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="h-16 w-16 mr-3 overflow-hidden rounded-lg border-2 border-game-accent"
+            className="free-fire-logo h-16 w-16 mr-3 overflow-hidden rounded-lg"
+            variants={fireLogoAnimation}
+            animate="animate"
           >
             <img src={logoPath} alt="Sarth Esports Logo" className="w-full h-full object-cover" />
+            <motion.div 
+              className="absolute inset-0 border-2 border-[#FF5722] rounded-lg"
+              animate={{
+                boxShadow: ["0 0 5px rgba(255, 87, 34, 0.7)", "0 0 15px rgba(255, 87, 34, 0.9)", "0 0 5px rgba(255, 87, 34, 0.7)"]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </motion.div>
+          
           <div>
-            <h1 className="font-audiowide text-2xl text-game-blue">SARTH <span className="text-game-accent">ESPORTS</span></h1>
-            <p className="text-xs text-game-text-dim">FREE FIRE TOURNAMENT</p>
+            <h1 className="font-audiowide text-2xl text-white">
+              <motion.span 
+                className="text-[#00E5FF] inline-block"
+                animate={{ 
+                  textShadow: ["0 0 5px rgba(0, 229, 255, 0.7)", "0 0 15px rgba(0, 229, 255, 0.9)", "0 0 5px rgba(0, 229, 255, 0.7)"] 
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                SARTH
+              </motion.span>{" "}
+              <motion.span 
+                className="text-[#FF5722] inline-block"
+                animate={{ 
+                  textShadow: ["0 0 5px rgba(255, 87, 34, 0.7)", "0 0 15px rgba(255, 87, 34, 0.9)", "0 0 5px rgba(255, 87, 34, 0.7)"] 
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                ESPORTS
+              </motion.span>
+            </h1>
+            
+            <div className="relative mt-1">
+              <p className="text-xs text-game-text-dim font-orbitron tracking-wider">FREE FIRE TOURNAMENT</p>
+              <motion.div 
+                className="h-[1px] bg-gradient-to-r from-transparent via-[#FF5722] to-transparent"
+                animate={{ scaleX: [0, 1, 0], x: ["-100%", "0%", "100%"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
           </div>
         </div>
         
-        {/* Navigation */}
-        <nav className="flex items-center flex-wrap justify-center gap-x-8 gap-y-2">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-          >
-            <Link href="/" className="font-orbitron text-sm uppercase tracking-wider hover:text-game-accent transition-colors cursor-pointer">
-              Home
-            </Link>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-          >
-            <Link href="#" className="font-orbitron text-sm uppercase tracking-wider hover:text-game-accent transition-colors cursor-pointer">
-              Tournaments
-            </Link>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-          >
-            <Link href="#" className="font-orbitron text-sm uppercase tracking-wider hover:text-game-accent transition-colors cursor-pointer">
-              Leaderboard
-            </Link>
-          </motion.div>
+        {/* Mobile menu button */}
+        <motion.button
+          className="md:hidden absolute top-4 right-4 w-10 h-10 flex flex-col justify-center items-center z-50"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          whileTap={{ scale: 0.9 }}
+        >
+          <motion.span
+            className="w-6 h-0.5 bg-[#FF5722] block mb-1.5"
+            animate={{ rotate: isMenuOpen ? 45 : 0, y: isMenuOpen ? 8 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.span
+            className="w-6 h-0.5 bg-[#FF5722] block"
+            animate={{ opacity: isMenuOpen ? 0 : 1, x: isMenuOpen ? -20 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.span
+            className="w-6 h-0.5 bg-[#FF5722] block mt-1.5"
+            animate={{ rotate: isMenuOpen ? -45 : 0, y: isMenuOpen ? -8 : 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.button>
+        
+        {/* Navigation - Desktop */}
+        <nav className="hidden md:flex items-center flex-wrap justify-center gap-x-10 gap-y-2">
+          {["Home", "Tournaments", "Leaderboard", "Rules"].map((item, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={navVariants}
+              initial="hidden"
+              animate="visible"
+              whileHover={{ scale: 1.1 }}
+              className="relative overflow-hidden group"
+            >
+              <Link 
+                href={i === 0 ? "/" : "#"} 
+                className="font-orbitron text-sm uppercase tracking-wider text-white group-hover:text-[#FF5722] transition-colors cursor-pointer"
+              >
+                {item}
+              </Link>
+              <motion.div 
+                className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF5722]"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+          ))}
+          
           <motion.a 
             href="#registration"
-            whileHover={{ scale: 1.05 }}
+            custom={4}
+            variants={navVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 87, 34, 0.7)" }}
             whileTap={{ scale: 0.95 }}
-            className="font-orbitron text-sm uppercase bg-gradient-to-r from-game-accent to-red-700 hover:from-red-600 hover:to-game-accent 
-            text-white px-6 py-2 rounded tracking-wider transition-all shadow-lg shadow-game-accent/30"
+            className="ff-button font-orbitron text-sm uppercase tracking-wider flex items-center gap-2 relative overflow-hidden"
           >
-            Register Now
+            <span className="relative z-10">Register Now</span>
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-[#FF5722]/70 to-red-700/70 z-0"
+              animate={{ x: ["-100%", "0%"] }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            />
           </motion.a>
         </nav>
+        
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-lg z-40 flex items-center justify-center"
+              initial={{ opacity: 0, clipPath: "circle(0% at top right)" }}
+              animate={{ opacity: 1, clipPath: "circle(150% at top right)" }}
+              exit={{ opacity: 0, clipPath: "circle(0% at top right)" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <motion.nav 
+                className="flex flex-col items-center justify-center gap-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {["Home", "Tournaments", "Leaderboard", "Rules"].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * i + 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                    className="relative"
+                  >
+                    <Link 
+                      href={i === 0 ? "/" : "#"} 
+                      className="font-orbitron text-xl uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item}
+                    </Link>
+                    <motion.div 
+                      className="absolute -bottom-2 left-0 w-full h-[1px]"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1, background: ["linear-gradient(90deg, transparent, #FF5722, transparent)"] }}
+                      transition={{ duration: 1, delay: 0.1 * i + 0.5 }}
+                    />
+                  </motion.div>
+                ))}
+                
+                <motion.a 
+                  href="#registration"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="ff-button mt-4 font-orbitron text-base uppercase tracking-wider"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Register Now
+                </motion.a>
+              </motion.nav>
+              
+              {/* Decorative elements for mobile menu */}
+              <motion.div 
+                className="absolute top-1/4 left-10 w-20 h-20 border border-[#FF5722] opacity-20 rounded-full"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.1, 0.3, 0.1]
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              <motion.div 
+                className="absolute bottom-1/4 right-10 w-32 h-32 border border-[#00E5FF] opacity-20 rounded-full"
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  opacity: [0.1, 0.2, 0.1]
+                }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );
