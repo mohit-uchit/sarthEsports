@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function AlokModel3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Create a div that sits on top of the model to prevent any interaction
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.zIndex = '10';
+    overlay.style.cursor = 'default';
+    
+    if (containerRef.current) {
+      containerRef.current.appendChild(overlay);
+    }
+  }, []);
+
   return (
     <motion.div 
       className="relative w-full h-full"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
+      ref={containerRef}
     >
       {/* Glow effect behind the model */}
       <motion.div
@@ -23,23 +42,21 @@ export default function AlokModel3D() {
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
       
-      {/* Embeded Sketchfab 3D model */}
+      {/* Embedded Sketchfab 3D model */}
       <motion.div 
-        className="sketchfab-embed-wrapper w-full h-full" 
+        className="sketchfab-embed-wrapper w-full h-full"
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="w-full h-full pointer-events-none" style={{ pointerEvents: "none" }}>
-          <iframe 
-            title="FF Alok 3D Model" 
-            className="w-full h-full pointer-events-none"
-            style={{ pointerEvents: "none" }}
-            frameBorder="0" 
-            allowFullScreen={true}
-            allow="autoplay; fullscreen; xr-spatial-tracking" 
-            src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0&ui_theme=dark&dnt=1&ui_controls=0&ui_infos=0&ui_inspector=0&ui_watermark_link=0&ui_help=0&disable_scroll=1&scrollwheel=0&camera=0"
-          ></iframe>
-        </div>
+        <iframe 
+          title="FF Alok 3D Model" 
+          className="w-full h-full"
+          frameBorder="0" 
+          allowFullScreen={true}
+          allow="autoplay; fullscreen; xr-spatial-tracking" 
+          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0&ui_theme=dark&dnt=1&ui_controls=0&ui_infos=0&ui_inspector=0&ui_watermark_link=0&ui_help=0&ui_stop=0&annotations_visible=0&annotation_tooltip_visible=0&ui_animations=0"
+          style={{ width: "100%", height: "100%" }}
+        ></iframe>
       </motion.div>
       
       {/* Animated rings around the model */}
