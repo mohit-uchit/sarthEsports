@@ -29,14 +29,17 @@ export default function AlokModel3D() {
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
-        <iframe 
-          title="FF Alok 3D Model" 
-          className="w-full h-full"
-          frameBorder="0" 
-          allowFullScreen={true}
-          allow="autoplay; fullscreen; xr-spatial-tracking" 
-          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0&ui_theme=dark&dnt=1"
-        ></iframe>
+        <div className="w-full h-full pointer-events-none" style={{ pointerEvents: "none" }}>
+          <iframe 
+            title="FF Alok 3D Model" 
+            className="w-full h-full pointer-events-none"
+            style={{ pointerEvents: "none" }}
+            frameBorder="0" 
+            allowFullScreen={true}
+            allow="autoplay; fullscreen; xr-spatial-tracking" 
+            src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0&ui_theme=dark&dnt=1&ui_controls=0&ui_infos=0&ui_inspector=0&ui_watermark_link=0&ui_help=0&disable_scroll=1&scrollwheel=0&camera=0"
+          ></iframe>
+        </div>
       </motion.div>
       
       {/* Animated rings around the model */}
