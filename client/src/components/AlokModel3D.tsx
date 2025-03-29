@@ -35,7 +35,7 @@ export default function AlokModel3D() {
           frameBorder="0" 
           allowFullScreen={true}
           allow="autoplay; fullscreen; xr-spatial-tracking" 
-          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1"
+          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0&ui_theme=dark&dnt=1"
         ></iframe>
       </motion.div>
       
