@@ -35,7 +35,7 @@ export default function AlokModel3D() {
           frameBorder="0" 
           allowFullScreen={true}
           allow="autoplay; fullscreen; xr-spatial-tracking" 
-          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1"
+          src="https://sketchfab.com/models/3cff31aa55e847edb8b0033d70420c51/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_infos=0&ui_controls=0&ui_help=0"
         ></iframe>
       </motion.div>
       
@@ -59,6 +59,52 @@ export default function AlokModel3D() {
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
+      
+      {/* Website logo in the circle center (bottom-left) */}
+      <motion.div 
+        className="absolute bottom-[15%] left-[15%] z-10 bg-[#111] rounded-full p-2 shadow-lg"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          boxShadow: [
+            "0 0 10px rgba(0, 229, 255, 0.3)",
+            "0 0 20px rgba(0, 229, 255, 0.5)",
+            "0 0 10px rgba(0, 229, 255, 0.3)"
+          ]
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-10 h-10 flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M12 3L4 7.5L12 12L20 7.5L12 3Z" fill="#00E5FF" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M4 16.5L12 21L20 16.5L12 12L4 16.5Z" fill="#FF5722" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M4 7.5V16.5L12 12L4 7.5Z" fill="#00BCD4" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M20 7.5V16.5L12 12L20 7.5Z" fill="#E64A19" />
+          </svg>
+        </div>
+      </motion.div>
+      
+      {/* Website logo in the circle center (top-right) */}
+      <motion.div 
+        className="absolute top-[15%] right-[15%] z-10 bg-[#111] rounded-full p-2 shadow-lg"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          boxShadow: [
+            "0 0 10px rgba(255, 87, 34, 0.3)",
+            "0 0 20px rgba(255, 87, 34, 0.5)",
+            "0 0 10px rgba(255, 87, 34, 0.3)"
+          ]
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <div className="w-10 h-10 flex items-center justify-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" clipRule="evenodd" d="M12 3L4 7.5L12 12L20 7.5L12 3Z" fill="#FF5722" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M4 16.5L12 21L20 16.5L12 12L4 16.5Z" fill="#00E5FF" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M4 7.5V16.5L12 12L4 7.5Z" fill="#E64A19" />
+            <path fillRule="evenodd" clipRule="evenodd" d="M20 7.5V16.5L12 12L20 7.5Z" fill="#00BCD4" />
+          </svg>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
