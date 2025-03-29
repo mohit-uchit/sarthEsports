@@ -186,17 +186,17 @@ export default function Header() {
               transition={{ duration: 0.3 }}
             />
             <div className="hidden group-hover:block absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-md border border-[#FF5722]/30 rounded-md p-2 w-48">
-              <Link href="/terms">
-                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Terms of Service</a>
+              <Link href="/terms" className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">
+                Terms of Service
               </Link>
-              <Link href="/privacy">
-                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Privacy Policy</a>
+              <Link href="/privacy" className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">
+                Privacy Policy
               </Link>
-              <Link href="/refund">
-                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Refund Policy</a>
+              <Link href="/refund" className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">
+                Refund Policy
               </Link>
-              <Link href="/aup">
-                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Acceptable Use</a>
+              <Link href="/aup" className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">
+                Acceptable Use
               </Link>
             </div>
           </motion.div>
@@ -275,37 +275,33 @@ export default function Header() {
                   <h3 className="font-orbitron text-lg uppercase tracking-wider text-[#00E5FF] mb-2">Legal</h3>
                   
                   <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                    <Link href="/terms">
-                      <a 
-                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Terms
-                      </a>
+                    <Link 
+                      href="/terms"
+                      className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Terms
                     </Link>
-                    <Link href="/privacy">
-                      <a 
-                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Privacy
-                      </a>
+                    <Link 
+                      href="/privacy"
+                      className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Privacy
                     </Link>
-                    <Link href="/refund">
-                      <a 
-                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Refunds
-                      </a>
+                    <Link 
+                      href="/refund"
+                      className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Refunds
                     </Link>
-                    <Link href="/aup">
-                      <a 
-                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Usage
-                      </a>
+                    <Link 
+                      href="/aup"
+                      className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Usage
                     </Link>
                   </div>
                 </motion.div>

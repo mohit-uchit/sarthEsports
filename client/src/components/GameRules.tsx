@@ -1,85 +1,92 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Separator } from "./ui/separator";
-import { type SectionProps } from "../lib/types";
-import { Crown, Shield, Clock, XCircle, AlertTriangle, Award } from "lucide-react";
-import { CardWithNeon } from "./ui/card-with-neon";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Separator } from './ui/separator';
+import { type SectionProps } from '../lib/types';
+import {
+  Crown,
+  Shield,
+  Clock,
+  XCircle,
+  AlertTriangle,
+  Award,
+} from 'lucide-react';
+import { CardWithNeon } from './ui/card-with-neon';
 
 export default function GameRules() {
   const sectionProps: SectionProps = {
-    id: "rules",
-    title: "Game Rules",
-    subtitle: "Tournament Format & Guidelines",
-    icon: "rules"
+    id: 'rules',
+    title: 'Game Rules',
+    subtitle: 'Tournament Format & Guidelines',
+    icon: 'rules',
   };
 
   const ruleCategories = [
     {
-      title: "Tournament Format",
+      title: 'Tournament Format',
       icon: <Crown className="h-6 w-6 text-cyan-400" />,
       rules: [
-        "Solo Battle Royale matches on Bermuda map only",
-        "Total of 4 matches across qualifiers and finals",
-        "48 players maximum (first-come, first-served)",
-        "Top 24 players from qualifiers advance to finals",
-        "Custom room password will be shared 15 minutes before match start"
-      ]
+        'Solo Battle Royale matches on Bermuda map only',
+        'Total of 3 matches across qualifiers and finals',
+        '48 players maximum (first-come, first-served)',
+        'Top 24 players from qualifiers advance to finals',
+        'Custom room password will be shared 15 minutes before match start',
+      ],
     },
     {
-      title: "Player Requirements",
+      title: 'Player Requirements',
       icon: <Shield className="h-6 w-6 text-cyan-400" />,
       rules: [
-        "Must have a valid Free Fire account (UID required)",
-        "Players must be available 15 minutes before match start",
-        "Minimum account level: 40+",
-        "Phone/tablet devices only (no emulators allowed)",
-        "Must join WhatsApp group for tournament communications"
-      ]
+        'Must have a valid Free Fire account (UID required)',
+        'Players must be available 15 minutes before match start',
+        'Minimum account level: 40+',
+        'Phone/tablet devices only (no emulators allowed)',
+        'Must join WhatsApp group for tournament communications',
+      ],
     },
     {
-      title: "Scoring System",
+      title: 'Scoring System',
       icon: <Award className="h-6 w-6 text-cyan-400" />,
       rules: [
-        "Placement points based on final position (1st: 15pts, 2nd: 12pts, etc.)",
-        "Kill points: 1 point per elimination",
-        "Bonus points for Kill Leader (most kills in a match)",
-        "Tiebreaker: Total kills, then best placement",
-        "See detailed scoring system section below"
-      ]
+        'Placement points based on final position (1st: 15pts, 2nd: 12pts, etc.)',
+        'Kill points: 1 point per elimination',
+        'Bonus points for Kill Leader (most kills in a match)',
+        'Tiebreaker: Total kills, then best placement',
+        'See detailed scoring system section below',
+      ],
     },
     {
-      title: "Timing & Schedule",
+      title: 'Timing & Schedule',
       icon: <Clock className="h-6 w-6 text-cyan-400" />,
       rules: [
-        "Qualifiers: April 15, 2025 - 7:00 PM IST",
-        "Finals: April 16, 2025 - 8:00 PM IST",
-        "Each match has a maximum duration of 18 minutes",
-        "Check-in required 15 minutes before each match",
-        "Results will be announced within 30 minutes after finals"
-      ]
+        'Qualifiers: April 5, 2025 - 7:00 PM IST',
+        'Finals: April 6, 2025 - 8:00 PM IST',
+        'Each match has a maximum duration of 40 minutes',
+        'Check-in required 15 minutes before each match',
+        'Results will be announced within 30 minutes after finals',
+      ],
     },
     {
-      title: "Prohibited Actions",
+      title: 'Prohibited Actions',
       icon: <XCircle className="h-6 w-6 text-red-500" />,
       rules: [
-        "Teaming with other players",
-        "Using hacks, mods or any unauthorized software",
-        "Account sharing or using multiple accounts",
-        "Toxic behavior in match chat or voice chat",
-        "Disconnecting intentionally to avoid elimination"
-      ]
+        'Teaming with other players',
+        'Using hacks, mods or any unauthorized software',
+        'Account sharing or using multiple accounts',
+        'Toxic behavior in match chat or voice chat',
+        'Disconnecting intentionally to avoid elimination',
+      ],
     },
     {
-      title: "Technical Issues",
+      title: 'Technical Issues',
       icon: <AlertTriangle className="h-6 w-6 text-yellow-500" />,
       rules: [
-        "Matches will not be restarted for individual player issues",
-        "Players are responsible for their internet connection",
-        "Device crashes/issues are player responsibility",
-        "Report technical problems to admins immediately",
-        "Tournament organizers have final decision on all matters"
-      ]
-    }
+        'Matches will not be restarted for individual player issues',
+        'Players are responsible for their internet connection',
+        'Device crashes/issues are player responsibility',
+        'Report technical problems to admins immediately',
+        'Tournament organizers have final decision on all matters',
+      ],
+    },
   ];
 
   return (
@@ -88,7 +95,7 @@ export default function GameRules() {
       className="relative py-20 px-4 overflow-hidden bg-black"
     >
       <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +124,9 @@ export default function GameRules() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-center gap-3 mb-4">
                     {category.icon}
-                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                    <h3 className="text-xl font-bold text-white">
+                      {category.title}
+                    </h3>
                   </div>
                   <ul className="space-y-2">
                     {category.rules.map((rule, ruleIndex) => (
@@ -141,8 +150,9 @@ export default function GameRules() {
           className="mt-12 text-center"
         >
           <p className="text-gray-400 italic">
-            Tournament rules are subject to change. Any modifications will be announced in the
-            official WhatsApp group. By registering, you agree to follow all tournament rules.
+            Tournament rules are subject to change. Any modifications will be
+            announced in the official WhatsApp group. By registering, you agree
+            to follow all tournament rules.
           </p>
         </motion.div>
       </motion.div>

@@ -12,6 +12,7 @@ import TermsPage from "@/pages/TermsPage";
 import PrivacyPage from "@/pages/PrivacyPage";
 import RefundPage from "@/pages/RefundPage";
 import AupPage from "@/pages/AupPage";
+import CertificateGeneratorPage from "@/pages/CertificateGeneratorPage";
 
 // Freeing Fire particles animation setup
 function setupParticles() {
@@ -141,6 +142,7 @@ function Router() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/refund" component={RefundPage} />
       <Route path="/aup" component={AupPage} />
+      <Route path="/generatecertificate" component={CertificateGeneratorPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -32,33 +32,33 @@ export default function ScoringSystem() {
     { label: "Per Elimination", points: 1 },
     { label: "Kill Leader Bonus", points: 5 },
     { label: "First Blood Bonus", points: 1 },
-    { label: "Triple Kill (3+ kills in 30 seconds)", points: 2 },
+    { label: "Triple Kill", points: 2 },
   ];
 
   // Special awards and medals
   const specialAwards = [
     {
       name: "Tournament MVP",
-      description: "Player with highest total score",
-      reward: "Custom FF Profile Frame + Special Discord Role"
+      description: "Awarded to the player with the highest total score.",
+      reward: "Weekly Membership + Pre-entry to the next tournament."
     },
     {
       name: "Kill Leader",
-      description: "Player with most eliminations across all matches",
-      reward: "500 Diamonds + Kill Leader Badge"
+      description: "Given to the player with the most eliminations across all matches.",
+      reward: "100 Diamonds + Pre-entry to the next tournament."
     },
     {
       name: "Survival Specialist",
-      description: "Player with best average placement",
-      reward: "Elite Pass + Special Discord Role"
+      description: "Recognizing the player with the best average placement throughout the tournament.",
+      reward: "Entry into Sarth Esports Pro League."
     },
     {
       name: "Participation Gift",
-      description: "All tournament participants",
-      reward: "In-game weapon skin (time-limited)"
+      description: "A token of appreciation for all tournament participants.",
+      reward: "Participation Certificate."
     }
   ];
-
+  
   return (
     <section
       id={sectionProps.id}

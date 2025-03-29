@@ -144,7 +144,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <h1 className="font-audiowide text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight">
-                  FREE FIRE
+                  FREEFIRE
                 </h1>
                 <motion.div 
                   className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#FF5722] via-[#FF8A65] to-[#FF5722]"

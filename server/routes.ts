@@ -2,10 +2,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPlayerSchema } from "@shared/schema";
-import { ZodError } from "zod";
+import { ZodError, z } from "zod";
 import fs from "fs";
 import path from "path";
 import { sendRegistrationConfirmation } from "./emailService";
+import { sendCertificate } from "./certificateService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes for player registration
@@ -125,10 +126,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/players", async (_req, res) => {
     try {
       const players = await storage.getAllPlayers();
-      res.json(players);
+      // Add registration IDs to players
+      const playersWithIds = players.map(player => ({
+        ...player,
+        registrationId: `FF-${player.id.toString().padStart(4, '0')}`
+      }));
+      res.json(playersWithIds);
     } catch (error) {
       console.error("Error fetching players:", error);
       res.status(500).json({ message: "Error fetching players" });
+    }
+  });
+
+  // Send certificate to participant via email
+  app.post("/api/certificate/send", async (req, res) => {
+    try {
+      // Schema validation
+      const certificateSchema = z.object({
+        email: z.string().email("Invalid email address"),
+        fullName: z.string().min(2, "Full name is required"),
+        inGameName: z.string().min(2, "In-game name is required"),
+        certificateImage: z.string().min(100, "Certificate image is required")
+      });
+      
+      const result = certificateSchema.safeParse(req.body);
+      if (!result.success) {
+        return res.status(400).json({
+          message: "Invalid certificate data",
+          errors: result.error.errors
+        });
+      }
+      
+      const { email, fullName, inGameName, certificateImage } = req.body;
+      
+      // Check if SMTP is configured
+      if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
+        console.log("SMTP environment variables not configured, skipping certificate email");
+        return res.status(500).json({ 
+          message: "Email service not configured", 
+          emailSent: false 
+        });
+      }
+      
+      // Send certificate email
+      const emailSent = await sendCertificate(email, fullName, inGameName, certificateImage);
+      
+      if (emailSent) {
+        res.status(200).json({ 
+          message: "Certificate sent successfully",
+          emailSent: true
+        });
+      } else {
+        res.status(500).json({ 
+          message: "Failed to send certificate email",
+          emailSent: false
+        });
+      }
+    } catch (error) {
+      console.error("Certificate email error:", error);
+      if (error instanceof Error) {
+        res.status(500).json({ message: `Failed to send certificate: ${error.message}` });
+      } else {
+        res.status(500).json({ message: "Failed to send certificate" });
+      }
     }
   });
 
