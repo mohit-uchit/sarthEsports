@@ -5,5 +5,15 @@
     "uid": "1234567890",
     "rulesAgreement": true,
     "id": 1
+  },
+  {
+    "fullName": "Mohit Uchit",
+    "inGameName": "estet",
+    "uid": "32423342777",
+    "email": "deadsec.darky@gmail.com",
+    "phone": "9466775477",
+    "agreement": true,
+    "id": 1,
+    "registeredAt": "2025-03-29T07:07:52.009Z"
   }
 ]

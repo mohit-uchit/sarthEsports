@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AlokModel3D from "./AlokModel3D";
 
 export default function HeroSection() {
   return (
@@ -293,107 +294,10 @@ export default function HeroSection() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
               
-              {/* Main character SVG with better design */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative h-full"
-                style={{ filter: "drop-shadow(0 0 10px rgba(255, 87, 34, 0.5))" }}
-              >
-                <svg viewBox="0 0 400 600" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#111111" />
-                      <stop offset="50%" stopColor="#222222" />
-                      <stop offset="100%" stopColor="#111111" />
-                    </linearGradient>
-                    <linearGradient id="fire-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#FF5722" />
-                      <stop offset="50%" stopColor="#FF8A65" />
-                      <stop offset="100%" stopColor="#FF5722" />
-                    </linearGradient>
-                    <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#00E5FF" />
-                      <stop offset="100%" stopColor="#0099CC" />
-                    </linearGradient>
-                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="6" result="blur" />
-                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                    <filter id="fire-glow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="8" result="blur" />
-                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                    {/* Animated flame pattern */}
-                    <pattern id="flame-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                      <motion.path 
-                        d="M0,40 Q10,30 20,40 Q30,30 40,40 L40,30 Q30,20 20,30 Q10,20 0,30 Z" 
-                        fill="url(#fire-gradient)"
-                        animate={{ d: [
-                          "M0,40 Q10,30 20,40 Q30,30 40,40 L40,30 Q30,20 20,30 Q10,20 0,30 Z",
-                          "M0,40 Q10,25 20,40 Q30,25 40,40 L40,30 Q30,15 20,30 Q10,15 0,30 Z",
-                          "M0,40 Q10,30 20,40 Q30,30 40,40 L40,30 Q30,20 20,30 Q10,20 0,30 Z"
-                        ]}}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      />
-                    </pattern>
-                  </defs>
-                  
-                  {/* Body */}
-                  <path d="M200,80 C300,100 320,200 320,300 C320,450 250,520 200,550 C150,520 80,450 80,300 C80,200 100,100 200,80" 
-                    fill="url(#body-gradient)" />
-                  
-                  {/* Helmet */}
-                  <path d="M200,100 C240,110 270,140 270,180 C270,220 240,260 200,260 C160,260 130,220 130,180 C130,140 160,110 200,100" 
-                    fill="#191919" stroke="#333" strokeWidth="2" />
-                  
-                  {/* Visor */}
-                  <path d="M170,160 L230,160 L220,220 L180,220 Z" 
-                    fill="url(#fire-gradient)" filter="url(#fire-glow)" />
-                  
-                  {/* Fire effect on visor */}
-                  <path d="M178,180 L222,180 L215,215 L185,215 Z" 
-                    fill="url(#flame-pattern)" opacity="0.7" />
-                  
-                  {/* Gun with fire effects */}
-                  <g>
-                    <path d="M320,280 L350,260 L380,270 L390,290 L370,310 L340,310 L320,300 Z" 
-                      fill="#222" stroke="#333" strokeWidth="1" />
-                    <motion.path 
-                      d="M390,290 L405,290 L400,300 L390,300 Z" 
-                      fill="url(#fire-gradient)"
-                      animate={{ opacity: [0.7, 1, 0.7], scale: [0.95, 1.05, 0.95] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                      filter="url(#fire-glow)"
-                    />
-                    <path d="M350,270 L360,270 L365,280 L355,280 Z" 
-                      fill="url(#blue-gradient)" filter="url(#glow)" />
-                  </g>
-                  
-                  {/* Arms */}
-                  <path d="M150,220 C130,240 110,300 100,350 M250,220 C270,240 290,300 300,350" 
-                    stroke="#222" strokeWidth="40" strokeLinecap="round" />
-                  
-                  {/* Accent lines on armor */}
-                  <path d="M180,280 L220,280 L210,450 L190,450 Z" 
-                    fill="url(#fire-gradient)" fillOpacity="0.3" />
-                  
-                  <motion.path 
-                    d="M140,200 L120,300 L110,380 M260,200 L280,300 L290,380" 
-                    stroke="url(#blue-gradient)" strokeWidth="3" strokeOpacity="0.8" fill="none"
-                    animate={{ strokeDasharray: ["10,20", "20,10", "10,20"] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                  />
-                  
-                  {/* Energy devices on shoulders */}
-                  <circle cx="150" cy="230" r="10" fill="url(#blue-gradient)" filter="url(#glow)" />
-                  <circle cx="250" cy="230" r="10" fill="url(#blue-gradient)" filter="url(#glow)" />
-                  
-                  {/* Free Fire symbol on chest */}
-                  <path d="M200,300 L215,315 L200,330 L185,315 Z" 
-                    fill="url(#fire-gradient)" filter="url(#fire-glow)" />
-                </svg>
-              </motion.div>
+              {/* Interactive 3D Alok character model */}
+              <div className="h-full w-full">
+                <AlokModel3D />
+              </div>
               
               {/* Floating rotation circles */}
               <motion.div 
