@@ -87,39 +87,39 @@ export default function Footer() {
             <h4 className="font-orbitron text-white text-lg mb-5 pb-2 border-b border-gray-800">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
+                <a href="/" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-2 text-game-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"></path>
                   </svg>
-                  Tournaments
+                  Home
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
+                <a href="/players" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-2 text-game-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"></path>
                   </svg>
-                  Leaderboards
+                  Registered Players
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
+                <a href="/rules" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-2 text-game-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"></path>
                   </svg>
-                  News & Updates
+                  Tournament Rules
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
+                <a href="/contact" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-2 text-game-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"></path>
                   </svg>
-                  About Us
+                  Contact Us
                 </a>
               </li>
               <li>
-                <a href="#registration" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
+                <a href="/#registration" className="text-gray-400 hover:text-game-blue transition-colors flex items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mr-2 text-game-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 18 6-6-6-6"></path>
                   </svg>
@@ -138,20 +138,20 @@ export default function Footer() {
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <a href="mailto:deadsec.darky@gmail.com" className="hover:text-game-blue transition-colors">deadsec.darky@gmail.com</a>
+                <a href="mailto:admin@sarthesports.games" className="hover:text-game-blue transition-colors">admin@sarthesports.games</a>
               </li>
               <li className="flex items-start text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-3 text-game-accent mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
-                <span>+91 9876543210</span>
+                <span>Contact information available on request</span>
               </li>
               <li className="flex items-start text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mr-3 text-game-accent mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
-                <span>Esports Training Facility<br/>123 Gaming Avenue<br/>Mumbai, India</span>
+                <span>Sushant Lok III, A-4B<br/>Sector 57, Gurugram<br/>Haryana 122003, India</span>
               </li>
             </ul>
           </div>
@@ -160,11 +160,15 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">&copy; {new Date().getFullYear()} Sarth Esports. All rights reserved.</p>
           <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-            <a href="#" className="hover:text-game-blue transition-colors">Terms & Conditions</a>
+            <a href="/terms" className="hover:text-game-blue transition-colors">Terms & Conditions</a>
             <span className="text-gray-700">|</span>
-            <a href="#" className="hover:text-game-blue transition-colors">Privacy Policy</a>
+            <a href="/privacy" className="hover:text-game-blue transition-colors">Privacy Policy</a>
             <span className="text-gray-700">|</span>
-            <a href="#" className="hover:text-game-blue transition-colors">Contact Us</a>
+            <a href="/refund" className="hover:text-game-blue transition-colors">Refund Policy</a>
+            <span className="text-gray-700">|</span>
+            <a href="/aup" className="hover:text-game-blue transition-colors">Acceptable Use</a>
+            <span className="text-gray-700">|</span>
+            <a href="/contact" className="hover:text-game-blue transition-colors">Contact Us</a>
           </div>
         </div>
       </div>

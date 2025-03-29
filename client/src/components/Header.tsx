@@ -137,11 +137,12 @@ export default function Header() {
         </motion.button>
         
         {/* Navigation - Desktop */}
-        <nav className="hidden md:flex items-center flex-wrap justify-center gap-x-10 gap-y-2">
+        <nav className="hidden md:flex items-center flex-wrap justify-center gap-x-6 gap-y-2">
           {[
             { name: "Home", path: "/" },
             { name: "Players", path: "/players" },
-            { name: "Rules", path: "/rules" }
+            { name: "Rules", path: "/rules" },
+            { name: "Contact", path: "/contact" }
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -167,9 +168,42 @@ export default function Header() {
             </motion.div>
           ))}
           
+          <motion.div
+            className="relative group"
+            custom={4}
+            variants={navVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ scale: 1.1 }}
+          >
+            <span className="font-orbitron text-sm uppercase tracking-wider text-white group-hover:text-[#FF5722] transition-colors cursor-pointer">
+              Legal
+            </span>
+            <motion.div 
+              className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF5722]"
+              initial={{ scaleX: 0 }}
+              whileHover={{ scaleX: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+            <div className="hidden group-hover:block absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-md border border-[#FF5722]/30 rounded-md p-2 w-48">
+              <Link href="/terms">
+                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Terms of Service</a>
+              </Link>
+              <Link href="/privacy">
+                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Privacy Policy</a>
+              </Link>
+              <Link href="/refund">
+                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Refund Policy</a>
+              </Link>
+              <Link href="/aup">
+                <a className="block px-4 py-2 text-white hover:text-[#FF5722] text-sm font-orbitron">Acceptable Use</a>
+              </Link>
+            </div>
+          </motion.div>
+          
           <motion.a 
             href="/#registration"
-            custom={4}
+            custom={5}
             variants={navVariants}
             initial="hidden"
             animate="visible"
@@ -197,7 +231,7 @@ export default function Header() {
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <motion.nav 
-                className="flex flex-col items-center justify-center gap-8"
+                className="flex flex-col items-center justify-center gap-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -205,7 +239,8 @@ export default function Header() {
                 {[
                   { name: "Home", path: "/" },
                   { name: "Players", path: "/players" },
-                  { name: "Rules", path: "/rules" }
+                  { name: "Rules", path: "/rules" },
+                  { name: "Contact", path: "/contact" }
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -231,11 +266,55 @@ export default function Header() {
                   </motion.div>
                 ))}
                 
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="flex flex-col items-center"
+                >
+                  <h3 className="font-orbitron text-lg uppercase tracking-wider text-[#00E5FF] mb-2">Legal</h3>
+                  
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                    <Link href="/terms">
+                      <a 
+                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Terms
+                      </a>
+                    </Link>
+                    <Link href="/privacy">
+                      <a 
+                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Privacy
+                      </a>
+                    </Link>
+                    <Link href="/refund">
+                      <a 
+                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Refunds
+                      </a>
+                    </Link>
+                    <Link href="/aup">
+                      <a 
+                        className="font-orbitron text-sm uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Usage
+                      </a>
+                    </Link>
+                  </div>
+                </motion.div>
+                
                 <motion.a 
                   href="/#registration"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
+                  transition={{ delay: 0.9 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="ff-button mt-4 font-orbitron text-base uppercase tracking-wider"

@@ -7,6 +7,11 @@ import HomePage from "@/pages/HomePage";
 import { useEffect } from "react";
 import PlayersPage from "@/pages/PlayersPage";
 import RulesPage from "@/pages/RulesPage";
+import ContactPage from "@/pages/ContactPage";
+import TermsPage from "@/pages/TermsPage";
+import PrivacyPage from "@/pages/PrivacyPage";
+import RefundPage from "@/pages/RefundPage";
+import AupPage from "@/pages/AupPage";
 
 // Freeing Fire particles animation setup
 function setupParticles() {
@@ -131,6 +136,11 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/players" component={PlayersPage} />
       <Route path="/rules" component={RulesPage} />
+      <Route path="/contact" component={ContactPage} />
+      <Route path="/terms" component={TermsPage} />
+      <Route path="/privacy" component={PrivacyPage} />
+      <Route path="/refund" component={RefundPage} />
+      <Route path="/aup" component={AupPage} />
       <Route component={NotFound} />
     </Switch>
   );
