@@ -5,6 +5,7 @@ import { insertPlayerSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import fs from "fs";
 import path from "path";
+import { sendRegistrationConfirmation } from "./emailService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes for player registration
@@ -40,9 +41,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Continue even if file save fails - we still have in-memory data
       }
       
+      // Send confirmation email
+      let emailSent = false;
+      try {
+        if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+          emailSent = await sendRegistrationConfirmation(player);
+        } else {
+          console.log("SMTP environment variables not configured, skipping email");
+        }
+      } catch (emailError) {
+        console.error("Failed to send confirmation email:", emailError);
+      }
+      
       res.status(201).json({ 
         message: "Registration successful", 
-        player 
+        player,
+        emailSent
       });
     } catch (error) {
       if (error instanceof ZodError) {

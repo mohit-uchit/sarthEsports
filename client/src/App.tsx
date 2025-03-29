@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import HomePage from "@/pages/HomePage";
 import { useEffect } from "react";
+import PlayersPage from "@/pages/PlayersPage";
+import RulesPage from "@/pages/RulesPage";
 
 // Freeing Fire particles animation setup
 function setupParticles() {
@@ -127,6 +129,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={HomePage} />
+      <Route path="/players" component={PlayersPage} />
+      <Route path="/rules" component={RulesPage} />
       <Route component={NotFound} />
     </Switch>
   );

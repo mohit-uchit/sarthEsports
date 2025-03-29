@@ -25,7 +25,7 @@ import { apiRequest } from "../lib/queryClient";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "./ui/dialog";
 import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { generateRegistrationId } from "../lib/utils";
-import { PlayerWithRegistrationId } from "../lib/types";
+import { PlayerWithRegistrationId, RegistrationResponse, TournamentStatus } from "../lib/types";
 
 type FormData = {
   fullName: string;
@@ -41,9 +41,10 @@ export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [registeredPlayer, setRegisteredPlayer] = useState<PlayerWithRegistrationId | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
 
   // Get tournament registration status
-  const { data: tournamentStatus, isLoading: isTournamentStatusLoading } = useQuery({
+  const { data: tournamentStatus, isLoading: isTournamentStatusLoading } = useQuery<TournamentStatus>({
     queryKey: ['/api/tournament/status'],
     refetchInterval: 60000, // Refetch every minute
   });
@@ -60,22 +61,22 @@ export default function RegistrationForm() {
     },
   });
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending } = useMutation<RegistrationResponse, Error, FormData>({
     mutationFn: async (data: FormData) => {
-      const response = await apiRequest('/api/players/register', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      
+      const response = await apiRequest(
+        'POST',
+        '/api/players/register',
+        data
+      );
       return response.json();
     },
     onSuccess: (data) => {
       // Create a player with registration ID
       const playerWithId = generateRegistrationId(data.player);
       setRegisteredPlayer(playerWithId);
+      
+      // Set email status
+      setEmailSent(data.emailSent || false);
       
       // Show success modal
       setShowSuccessModal(true);
@@ -437,8 +438,16 @@ export default function RegistrationForm() {
           <div className="bg-cyan-900/20 p-4 rounded-md text-sm text-gray-300 mt-2">
             <p>
               <span className="text-cyan-400 font-bold">Important:</span> Please save your 
-              registration ID for reference. We'll send you an email with tournament details 
-              and add you to the WhatsApp group for updates.
+              registration ID for reference. 
+              {emailSent ? (
+                <span className="text-green-400 block mt-2">
+                  ✓ Confirmation email sent to your registered email address.
+                </span>
+              ) : (
+                <span className="text-yellow-400 block mt-2">
+                  ⚠️ Confirmation email could not be sent. You'll still receive WhatsApp updates.
+                </span>
+              )}
             </p>
           </div>
           

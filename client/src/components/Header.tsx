@@ -138,7 +138,11 @@ export default function Header() {
         
         {/* Navigation - Desktop */}
         <nav className="hidden md:flex items-center flex-wrap justify-center gap-x-10 gap-y-2">
-          {["Home", "Tournaments", "Leaderboard", "Rules"].map((item, i) => (
+          {[
+            { name: "Home", path: "/" },
+            { name: "Players", path: "/players" },
+            { name: "Rules", path: "/rules" }
+          ].map((item, i) => (
             <motion.div
               key={i}
               custom={i}
@@ -149,10 +153,10 @@ export default function Header() {
               className="relative overflow-hidden group"
             >
               <Link 
-                href={i === 0 ? "/" : "#"} 
+                href={item.path} 
                 className="font-orbitron text-sm uppercase tracking-wider text-white group-hover:text-[#FF5722] transition-colors cursor-pointer"
               >
-                {item}
+                {item.name}
               </Link>
               <motion.div 
                 className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FF5722]"
@@ -164,7 +168,7 @@ export default function Header() {
           ))}
           
           <motion.a 
-            href="#registration"
+            href="/#registration"
             custom={4}
             variants={navVariants}
             initial="hidden"
@@ -198,7 +202,11 @@ export default function Header() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                {["Home", "Tournaments", "Leaderboard", "Rules"].map((item, i) => (
+                {[
+                  { name: "Home", path: "/" },
+                  { name: "Players", path: "/players" },
+                  { name: "Rules", path: "/rules" }
+                ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
@@ -208,11 +216,11 @@ export default function Header() {
                     className="relative"
                   >
                     <Link 
-                      href={i === 0 ? "/" : "#"} 
+                      href={item.path} 
                       className="font-orbitron text-xl uppercase tracking-wider text-white hover:text-[#FF5722] transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item}
+                      {item.name}
                     </Link>
                     <motion.div 
                       className="absolute -bottom-2 left-0 w-full h-[1px]"
@@ -224,7 +232,7 @@ export default function Header() {
                 ))}
                 
                 <motion.a 
-                  href="#registration"
+                  href="/#registration"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}

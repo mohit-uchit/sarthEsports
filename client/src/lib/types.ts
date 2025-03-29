@@ -13,6 +13,19 @@ export interface RegistrationFormData {
   agreement: boolean;
 }
 
+export interface RegistrationResponse {
+  message: string;
+  player: Player;
+  emailSent: boolean;
+}
+
+export interface TournamentStatus {
+  registeredCount: number;
+  maxPlayers: number;
+  availableSlots: number;
+  isFull: boolean;
+}
+
 export interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
