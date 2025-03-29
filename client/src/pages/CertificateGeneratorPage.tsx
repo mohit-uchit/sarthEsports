@@ -27,7 +27,7 @@ import logoPath from "../assets/logo.jpeg";
 import { PlayerWithRegistrationId } from "@/lib/types";
 
 // Hash for the password: sarthSwami99@#9499934
-const HASHED_PASSWORD = "$2a$10$FJz8JL7m.ZfOVoyvgSfq7OVl3T5zxTXEjYEL0ZXXM3KkWFdFMhqF6";
+const HASHED_PASSWORD = "$2b$10$Rnk7NGWywEiL1cKkuA.jduy1R3Bzc75QnREePiCnOX/t3za8EHweC";
 
 // Form schema
 const formSchema = z.object({
