@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import TournamentDetails from "@/components/TournamentDetails";
-import RegistrationForm from "@/components/RegistrationForm";
-import Footer from "@/components/Footer";
+import Header from "../components/Header";
+import HeroSection from "../components/HeroSection";
+import TournamentDetails from "../components/TournamentDetails";
+import GameRules from "../components/GameRules";
+import ScoringSystem from "../components/ScoringSystem";
+import RegistrationForm from "../components/RegistrationForm";
+import Footer from "../components/Footer";
 
 // Animation variants
 const pageTransition = {
@@ -160,6 +162,8 @@ export default function HomePage() {
           </motion.div>
           
           <TournamentDetails />
+          <GameRules />
+          <ScoringSystem />
           <RegistrationForm />
         </div>
       </main>
