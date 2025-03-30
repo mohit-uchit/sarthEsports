@@ -3,6 +3,9 @@ import { registerRoutes } from './routes';
 import path from 'path';
 import { setupVite, log } from './vite';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url'; // Import to resolve __dirname in ES modules
+import { dirname } from 'path'; // Import to resolve __dirname in ES modules
+
 dotenv.config();
 
 const app = express();
@@ -53,7 +56,11 @@ app.use((req, res, next) => {
 
   // ✅ Serve Frontend Correctly in Production
   if (app.get('env') === 'production') {
-    const frontendPath = path.resolve(__dirname, '..', 'client', 'dist'); // ✅ Ensure correct path
+    // Use ES module equivalent of __dirname
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+
+    const frontendPath = path.resolve(__dirname, '..', 'client', 'dist');
     app.use(express.static(frontendPath));
 
     app.get('*', (_req, res) => {
