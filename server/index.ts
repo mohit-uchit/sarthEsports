@@ -8,9 +8,10 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// Middleware for logging and JSON response handling
 app.use((req, res, next) => {
   const start = Date.now();
-  const requestPath = req.path; // Fixed variable name
+  const requestPath = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
   const originalResJson = res.json;
@@ -44,18 +45,30 @@ app.use((req, res, next) => {
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
+
     res.status(status).json({ message });
     throw err;
   });
 
-  if (app.get('env') === 'development') {
+  // **Development**: Use Vite to handle middleware and SSR
+  if (process.env.NODE_ENV === 'development') {
     await setupVite(app, server);
-  } else {
+  }
+  // **Production**: Use static file serving from 'dist' folder
+  else {
     serveStatic(app);
   }
 
+  // Always serve the app on port 5000
   const port = 5000;
-  server.listen({ port, host: '0.0.0.0', reusePort: true }, () => {
-    log(`Server running on http://localhost:${port}`);
-  });
+  server.listen(
+    {
+      port,
+      host: '0.0.0.0',
+      reusePort: true,
+    },
+    () => {
+      log(`✅ Server running on http://localhost:${port}`);
+    },
+  );
 })();
