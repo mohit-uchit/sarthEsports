@@ -1,11 +1,7 @@
-import express, { type Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { registerRoutes } from './routes';
-import path from 'path';
-import { setupVite, log } from './vite';
+import { setupVite, serveStatic, log } from './vite';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url'; // Import to resolve __dirname in ES modules
-import { dirname } from 'path'; // Import to resolve __dirname in ES modules
-
 dotenv.config();
 
 const app = express();
@@ -14,11 +10,10 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use((req, res, next) => {
   const start = Date.now();
-  const requestPath = req.path; // ✅ Fixed variable name
-
+  const requestPath = req.path; // Fixed variable name
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
-  const originalResJson = res.json;
 
+  const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
     capturedJsonResponse = bodyJson;
     return originalResJson.apply(res, [bodyJson, ...args]);
@@ -46,7 +41,6 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  // Global Error Handler
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
@@ -54,37 +48,14 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // ✅ Serve Frontend Correctly in Production
-  if (app.get('env') === 'production') {
-    // Use ES module equivalent of __dirname
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-
-    const frontendPath = path.resolve(__dirname, '..', 'client', 'dist');
-    app.use(express.static(frontendPath));
-
-    app.get('*', (_req, res) => {
-      res.sendFile(path.join(frontendPath, 'index.html'));
-    });
+  if (app.get('env') === 'development') {
+    await setupVite(app, server);
   } else {
-    const frontendPath = path.resolve(__dirname, '..', 'dist'); // ✅ Ensuring correct path
-    app.use(express.static(frontendPath));
-
-    app.get('*', (_req, res) => {
-      res.sendFile(path.join(frontendPath, 'index.html'));
-    });
+    serveStatic(app);
   }
 
-  // ✅ Always serve the app on port 5000
   const port = 5000;
-  server.listen(
-    {
-      port,
-      host: '0.0.0.0',
-      reusePort: true,
-    },
-    () => {
-      log(`✅ Server running on http://localhost:${port}`);
-    },
-  );
+  server.listen({ port, host: '0.0.0.0', reusePort: true }, () => {
+    log(`Server running on http://localhost:${port}`);
+  });
 })();
