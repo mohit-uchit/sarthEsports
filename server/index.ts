@@ -52,8 +52,13 @@ app.use((req, res, next) => {
   });
 
   // ✅ Serve Frontend Correctly in Production
-  if (app.get('env') === 'development') {
-    await setupVite(app, server); // Use Vite in development
+  if (app.get('env') === 'production') {
+    const frontendPath = path.resolve(__dirname, '..', 'client', 'dist'); // ✅ Ensure correct path
+    app.use(express.static(frontendPath));
+
+    app.get('*', (_req, res) => {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    });
   } else {
     const frontendPath = path.resolve(__dirname, '..', 'dist'); // ✅ Ensuring correct path
     app.use(express.static(frontendPath));
@@ -73,6 +78,6 @@ app.use((req, res, next) => {
     },
     () => {
       log(`✅ Server running on http://localhost:${port}`);
-    }
+    },
   );
 })();
