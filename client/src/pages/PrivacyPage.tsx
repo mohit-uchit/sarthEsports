@@ -151,7 +151,8 @@ export default function PrivacyPage() {
               </p>
               <div className="mt-4">
                 <p>Email: admin@sarthesports.games</p>
-                <p>Address: Sushant Lok III, A-4B, Sector 57, Gurugram, Haryana 122003</p>
+                <p>Primary Address: Sushant Lok III, A-4B, Sector 57, Gurugram, Haryana 122003</p>
+                <p>Secondary Address: St. Thomas, 00802 Rumer Rd Way, Charlotte Amalie, St Thomas 00802, US Virgin Islands</p>
               </div>
             </div>
 

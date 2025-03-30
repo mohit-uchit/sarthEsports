@@ -26,8 +26,8 @@ import { useToast } from "@/hooks/use-toast";
 import logoPath from "../assets/logo.jpeg";
 import { PlayerWithRegistrationId } from "@/lib/types";
 
-// Hash for the password: sarthSwami99@#9499934
-const HASHED_PASSWORD = "$2b$10$Rnk7NGWywEiL1cKkuA.jduy1R3Bzc75QnREePiCnOX/t3za8EHweC";
+// Use a plain text password for development
+const ADMIN_PASSWORD = "sarthSwami99@#9499934";
 
 // Form schema
 const formSchema = z.object({
@@ -85,7 +85,7 @@ export default function CertificateGeneratorPage() {
   const handlePlayerSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEmail = e.target.value;
     if (!selectedEmail) return;
-    
+
     const player = players.find(p => p.email === selectedEmail);
     if (player) {
       form.setValue("fullName", player.fullName);
@@ -104,11 +104,11 @@ export default function CertificateGeneratorPage() {
         },
         body: JSON.stringify(data),
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to send certificate');
       }
-      
+
       return response.json();
     },
     onSuccess: () => {
@@ -128,14 +128,11 @@ export default function CertificateGeneratorPage() {
     }
   });
 
-  // Handle login form submission
-  const handleLogin = (data: Pick<FormValues, "password">) => {
-    const { password } = data;
+  // Fixed login handler
+  const handleLogin = () => {
+    const password = form.getValues("password");
 
-    // Verify the password
-    const isCorrect = bcrypt.compareSync(password, HASHED_PASSWORD);
-    
-    if (isCorrect) {
+    if (password === ADMIN_PASSWORD) {
       setAuthenticated(true);
       form.reset({
         password: "",
@@ -156,9 +153,22 @@ export default function CertificateGeneratorPage() {
     }
   };
 
-  // Handle certificate generation form submission
-  const handleGenerateCertificate = (data: FormValues) => {
+  // Fixed certificate generation handler
+  const handleGenerateCertificate = () => {
+    const { fullName, inGameName } = form.getValues();
+
+    // Check if required fields are filled
+    if (!fullName || !inGameName) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in the required fields: Full Name and In-Game Name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setShowCertificate(true);
+
     // Remove focus from all inputs
     document.querySelectorAll("input, textarea").forEach((el) => {
       (el as HTMLElement).blur();
@@ -181,18 +191,18 @@ export default function CertificateGeneratorPage() {
         unit: 'mm',
         format: 'a4',
       });
-      
+
       // Dimensions for A4 landscape
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      
+
       // Add image to PDF
       pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      
+
       // Get form values
       const { fullName, inGameName } = form.getValues();
       const fileName = `${fullName}_${inGameName}_Certificate.pdf`;
-      
+
       pdf.save(fileName);
     } catch (error) {
       console.error('Error generating PDF:', error);
@@ -218,7 +228,7 @@ export default function CertificateGeneratorPage() {
       });
 
       const { fullName, inGameName, email } = form.getValues();
-      
+
       if (!email) {
         toast({
           title: "Email Required",
@@ -256,7 +266,7 @@ export default function CertificateGeneratorPage() {
       <Header />
 
       <div className="cyber-grid absolute inset-0 opacity-10"></div>
-      
+
       <main className="container mx-auto px-4 py-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -280,7 +290,13 @@ export default function CertificateGeneratorPage() {
             <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-6 backdrop-blur-sm">
               <h2 className="font-orbitron text-2xl text-[#FF5722] mb-6">Admin Authentication</h2>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleLogin)} className="space-y-6">
+                <form 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleLogin();
+                  }} 
+                  className="space-y-6"
+                >
                   <FormField
                     control={form.control}
                     name="password"
@@ -305,6 +321,15 @@ export default function CertificateGeneratorPage() {
                   >
                     Login
                   </Button>
+
+                  {/* Alternative direct login button for testing */}
+                  <Button
+                    type="button"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-2"
+                    onClick={handleLogin}
+                  >
+                    Alternative Login
+                  </Button>
                 </form>
               </Form>
             </div>
@@ -324,7 +349,7 @@ export default function CertificateGeneratorPage() {
             >
               <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-6 backdrop-blur-sm">
                 <h2 className="font-orbitron text-2xl text-[#FF5722] mb-6">Generate Certificate</h2>
-                
+
                 <div className="mb-6">
                   <label className="block text-white mb-2 font-orbitron">Select Registered Player</label>
                   <select 
@@ -339,9 +364,15 @@ export default function CertificateGeneratorPage() {
                     ))}
                   </select>
                 </div>
-                
+
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(handleGenerateCertificate)} className="space-y-4">
+                  <form 
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleGenerateCertificate();
+                    }} 
+                    className="space-y-4"
+                  >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormField
                         control={form.control}
@@ -378,7 +409,7 @@ export default function CertificateGeneratorPage() {
                         )}
                       />
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <FormField
                         control={form.control}
@@ -432,7 +463,7 @@ export default function CertificateGeneratorPage() {
                         )}
                       />
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name="remarks"
@@ -450,7 +481,7 @@ export default function CertificateGeneratorPage() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="email"
@@ -469,7 +500,7 @@ export default function CertificateGeneratorPage() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <div className="flex flex-col sm:flex-row gap-4 pt-2">
                       <Button
                         type="submit"
@@ -477,7 +508,7 @@ export default function CertificateGeneratorPage() {
                       >
                         Generate Certificate
                       </Button>
-                      
+
                       <Button
                         type="button"
                         onClick={() => setAuthenticated(false)}
@@ -491,7 +522,7 @@ export default function CertificateGeneratorPage() {
                 </Form>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -501,7 +532,7 @@ export default function CertificateGeneratorPage() {
                 <div className="space-y-4">
                   <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-6 backdrop-blur-sm overflow-hidden">
                     <h2 className="font-orbitron text-2xl text-[#FF5722] mb-6">Certificate Preview</h2>
-                    
+
                     <div className="certificate-container overflow-hidden rounded-lg border-2 border-[#00E5FF]/50 shadow-[0_0_15px_rgba(0,229,255,0.5)] mb-6">
                       <div 
                         ref={certificateRef}
@@ -513,13 +544,13 @@ export default function CertificateGeneratorPage() {
                         <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-[#00E5FF] to-transparent"></div>
                         <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00E5FF] to-transparent"></div>
                         <div className="absolute right-0 top-0 w-1 h-full bg-gradient-to-t from-[#00E5FF] to-transparent"></div>
-                        
+
                         {/* Corner decorations */}
                         <div className="absolute top-6 left-6 w-16 h-16 border-t-2 border-l-2 border-[#FF5722]"></div>
                         <div className="absolute top-6 right-6 w-16 h-16 border-t-2 border-r-2 border-[#FF5722]"></div>
                         <div className="absolute bottom-6 left-6 w-16 h-16 border-b-2 border-l-2 border-[#FF5722]"></div>
                         <div className="absolute bottom-6 right-6 w-16 h-16 border-b-2 border-r-2 border-[#FF5722]"></div>
-                        
+
                         {/* Certificate content */}
                         <div className="relative z-10 text-center flex flex-col items-center max-w-2xl mx-auto">
                           <div className="flex items-center gap-4 mb-4">
@@ -536,29 +567,29 @@ export default function CertificateGeneratorPage() {
                               <span className="text-[#FF5722]">ESPORTS</span>
                             </h1>
                           </div>
-                          
+
                           <h2 className="font-orbitron text-xl text-white mb-1">CERTIFICATE OF PARTICIPATION</h2>
                           <div className="w-60 h-1 bg-gradient-to-r from-transparent via-[#00E5FF] to-transparent mb-6"></div>
-                          
+
                           <p className="text-gray-400 mb-4">This certifies that</p>
-                          
+
                           <h3 className="font-audiowide text-3xl text-[#00E5FF] mb-1">
                             {form.watch("fullName")}
                           </h3>
                           <p className="font-orbitron text-lg text-white mb-4">
                             "{form.watch("inGameName")}"
                           </p>
-                          
+
                           <p className="text-gray-300 mb-6 max-w-md">
                             has participated in the Free Fire Bermuda Solo Tournament organized by Sarth Esports
                             on <span className="text-[#FF5722]">6 April 2025</span>.
                           </p>
-                          
+
                           {/* Stats section */}
                           {(form.watch("position") || form.watch("kills") || form.watch("points")) && (
                             <div className="bg-black/50 border border-[#00E5FF]/30 rounded-lg p-4 mb-6 backdrop-blur-sm w-full max-w-sm">
                               <h4 className="font-orbitron text-sm text-[#FF5722] mb-2">TOURNAMENT PERFORMANCE</h4>
-                              
+
                               <div className="grid grid-cols-3 gap-4 text-center">
                                 {form.watch("position") && (
                                   <div>
@@ -566,14 +597,14 @@ export default function CertificateGeneratorPage() {
                                     <p className="font-orbitron text-lg text-white">{form.watch("position")}</p>
                                   </div>
                                 )}
-                                
+
                                 {form.watch("kills") && (
                                   <div>
                                     <p className="text-xs text-gray-400">KILLS</p>
                                     <p className="font-orbitron text-lg text-white">{form.watch("kills")}</p>
                                   </div>
                                 )}
-                                
+
                                 {form.watch("points") && (
                                   <div>
                                     <p className="text-xs text-gray-400">POINTS</p>
@@ -583,25 +614,25 @@ export default function CertificateGeneratorPage() {
                               </div>
                             </div>
                           )}
-                          
+
                           {/* Remarks */}
                           {form.watch("remarks") && (
                             <p className="text-gray-300 italic mb-6 max-w-md text-center">
                               "{form.watch("remarks")}"
                             </p>
                           )}
-                          
+
                           {/* Dates and signatures */}
                           <div className="w-full flex justify-between mt-4 text-sm">
                             <div className="text-center">
                               <p className="text-[#00E5FF]">QUALIFIERS</p>
                               <p className="text-gray-400">5 April 2025</p>
                             </div>
-                            
+
                             <div className="text-center border-b border-[#FF5722] pb-1">
                               <p className="text-gray-400 mt-6">Tournament Director</p>
                             </div>
-                            
+
                             <div className="text-center">
                               <p className="text-[#00E5FF]">FINALS</p>
                               <p className="text-gray-400">6 April 2025</p>
@@ -610,7 +641,7 @@ export default function CertificateGeneratorPage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Button
                         onClick={downloadPDF}
@@ -620,7 +651,7 @@ export default function CertificateGeneratorPage() {
                         {loading ? "Processing..." : "Download Certificate (PDF)"}
                         <div className="absolute inset-0 w-full h-full transition-all duration-300 scale-0 group-hover:scale-100 group-hover:bg-white/10 rounded-lg"></div>
                       </Button>
-                      
+
                       <Button
                         onClick={sendEmailWithCertificate}
                         className="bg-[#00E5FF] hover:bg-[#00E5FF]/80 text-black font-bold relative overflow-hidden group"

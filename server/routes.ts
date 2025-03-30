@@ -3,46 +3,14 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPlayerSchema } from "@shared/schema";
 import { ZodError, z } from "zod";
-import fs from "fs";
-import path from "path";
 import { sendRegistrationConfirmation } from "./emailService";
 import { sendCertificate } from "./certificateService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // API routes for player registration
   app.post("/api/players/register", async (req, res) => {
     try {
-      // Validate request body
       const validatedData = insertPlayerSchema.parse(req.body);
-      
-      // Store player data
       const player = await storage.registerPlayer(validatedData);
-      
-      // Attempt to save to JSON file
-      try {
-        const dataDir = path.join(process.cwd(), "data");
-        if (!fs.existsSync(dataDir)) {
-          fs.mkdirSync(dataDir, { recursive: true });
-        }
-        
-        const filePath = path.join(dataDir, "players.json");
-        
-        // Read existing data if file exists
-        let players = [];
-        if (fs.existsSync(filePath)) {
-          const data = fs.readFileSync(filePath, "utf8");
-          players = JSON.parse(data);
-        }
-        
-        // Add new player and save
-        players.push(player);
-        fs.writeFileSync(filePath, JSON.stringify(players, null, 2));
-      } catch (fileError) {
-        console.error("Error saving to JSON file:", fileError);
-        // Continue even if file save fails - we still have in-memory data
-      }
-      
-      // Send confirmation email
       let emailSent = false;
       try {
         if (process.env.SMTP_HOST && process.env.SMTP_USER) {
@@ -53,33 +21,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } catch (emailError) {
         console.error("Failed to send confirmation email:", emailError);
       }
-      
-      res.status(201).json({ 
-        message: "Registration successful", 
-        player,
-        emailSent
-      });
+      res.status(201).json({ message: "Registration successful", player, emailSent });
     } catch (error) {
       if (error instanceof ZodError) {
-        res.status(400).json({ 
-          message: "Validation error", 
-          errors: error.errors 
-        });
+        res.status(400).json({ message: "Validation error", errors: error.errors });
       } else if (error instanceof Error) {
         console.error("Registration error:", error.message);
-        res.status(400).json({ 
-          message: error.message 
-        });
+        res.status(400).json({ message: error.message });
       } else {
         console.error("Registration error:", error);
-        res.status(500).json({ 
-          message: "Registration failed" 
-        });
+        res.status(500).json({ message: "Registration failed" });
       }
     }
   });
 
-  // Check if player with UID exists
   app.get("/api/players/check-uid/:uid", async (req, res) => {
     try {
       const { uid } = req.params;
@@ -91,7 +46,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Check if player with email exists
   app.get("/api/players/check-email/:email", async (req, res) => {
     try {
       const { email } = req.params;
@@ -103,30 +57,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get tournament registration status
   app.get("/api/tournament/status", async (_req, res) => {
     try {
       const registeredCount = await storage.getRegisteredPlayersCount();
       const maxPlayers = storage.getMaxPlayers();
       const availableSlots = maxPlayers - registeredCount;
-      
-      res.json({
-        registeredCount,
-        maxPlayers,
-        availableSlots,
-        isFull: registeredCount >= maxPlayers,
-      });
+      res.json({ registeredCount, maxPlayers, availableSlots, isFull: registeredCount >= maxPlayers });
     } catch (error) {
       console.error("Error fetching tournament status:", error);
       res.status(500).json({ message: "Error fetching tournament status" });
     }
   });
 
-  // Get all registered players
   app.get("/api/players", async (_req, res) => {
     try {
       const players = await storage.getAllPlayers();
-      // Add registration IDs to players
       const playersWithIds = players.map(player => ({
         ...player,
         registrationId: `FF-${player.id.toString().padStart(4, '0')}`
@@ -138,57 +83,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Send certificate to participant via email
   app.post("/api/certificate/send", async (req, res) => {
     try {
-      // Schema validation
       const certificateSchema = z.object({
         email: z.string().email("Invalid email address"),
         fullName: z.string().min(2, "Full name is required"),
         inGameName: z.string().min(2, "In-game name is required"),
-        certificateImage: z.string().min(100, "Certificate image is required")
+        certificatePdf: z.string().min(100, "Certificate PDF is required"),
       });
-      
+
       const result = certificateSchema.safeParse(req.body);
       if (!result.success) {
-        return res.status(400).json({
-          message: "Invalid certificate data",
-          errors: result.error.errors
-        });
+        return res.status(400).json({ message: "Invalid certificate data", errors: result.error.errors });
       }
-      
-      const { email, fullName, inGameName, certificateImage } = req.body;
-      
-      // Check if SMTP is configured
+
+      const { email, fullName, inGameName, certificatePdf } = req.body;
+
       if (!process.env.SMTP_HOST || !process.env.SMTP_USER) {
         console.log("SMTP environment variables not configured, skipping certificate email");
-        return res.status(500).json({ 
-          message: "Email service not configured", 
-          emailSent: false 
-        });
+        return res.status(500).json({ message: "Email service not configured", emailSent: false });
       }
-      
-      // Send certificate email
-      const emailSent = await sendCertificate(email, fullName, inGameName, certificateImage);
-      
+
+      const emailSent = await sendCertificate(email, fullName, inGameName, certificatePdf);
+
       if (emailSent) {
-        res.status(200).json({ 
-          message: "Certificate sent successfully",
-          emailSent: true
-        });
+        res.status(200).json({ message: "Certificate sent successfully", emailSent: true });
       } else {
-        res.status(500).json({ 
-          message: "Failed to send certificate email",
-          emailSent: false
-        });
+        res.status(500).json({ message: "Failed to send certificate email", emailSent: false });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Certificate email error:", error);
-      if (error instanceof Error) {
-        res.status(500).json({ message: `Failed to send certificate: ${error.message}` });
-      } else {
-        res.status(500).json({ message: "Failed to send certificate" });
-      }
+      res.status(500).json({ 
+        message: "Failed to send certificate", 
+        error: error.message || "Unknown error", 
+        smtpResponse: error.response || "No SMTP response" 
+      });
+    }
+  });
+
+  app.post("/api/admin/normalize-data", async (_req, res) => {
+    try {
+      // @ts-ignore - Call the method we added
+      await storage.normalizeExistingData();
+      res.json({ message: "Player data normalized successfully" });
+    } catch (error) {
+      console.error("Error normalizing data:", error);
+      res.status(500).json({ message: "Error normalizing data" });
     }
   });
 

@@ -54,8 +54,9 @@ export default function ContactPage() {
                     <FaMapMarkerAlt className="text-[#FF5722] text-xl" />
                   </div>
                   <div>
-                    <h3 className="font-orbitron text-white">Address</h3>
-                    <p className="text-gray-300">Sushant Lok III, A-4B, Sector 57, Gurugram, Haryana 122003</p>
+                    <h3 className="font-orbitron text-white">Addresses</h3>
+                    <p className="text-gray-300 mb-2">Primary: Sushant Lok III, A-4B, Sector 57, Gurugram, Haryana 122003</p>
+                    <p className="text-gray-300">Secondary: St. Thomas, 00802 Rumer Rd Way, Charlotte Amalie, St Thomas 00802, US Virgin Islands</p>
                   </div>
                 </div>
                 
