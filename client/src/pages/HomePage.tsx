@@ -24,7 +24,7 @@ const pageTransition = {
 // Countdown functionality
 function TournamentCountdown() {
   // Tournament date - set to a date in the future
-  const tournamentDate = new Date("2025-06-15T12:00:00");
+  const tournamentDate = new Date("2025-04-05T19:00:00");
   
   const calculateTimeLeft = () => {
     const difference = Number(tournamentDate) - Number(new Date());
@@ -36,7 +36,7 @@ function TournamentCountdown() {
         minutes: 0,
         seconds: 0
       };
-    }
+     }
     
     return {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),

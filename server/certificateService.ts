@@ -24,7 +24,7 @@ export async function sendCertificate(
     } as SMTPTransport.Options);
 
     const info = await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sarth Esports" <noreply@sarthesports.games>',
+      from: process.env.SMTP_FROM || '"Sarth Esports" <admin@sarthesports.games>',
       to: email,
       subject: `🏆 Your Free Fire Tournament Certificate - Sarth Esports`,
       html: `
