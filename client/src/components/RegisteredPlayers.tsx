@@ -129,28 +129,31 @@ export default function RegisteredPlayers() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {currentPlayers.map((player, index) => (
-                        <TableRow 
-                          key={player.id} 
-                          className="hover:bg-game-blue-dim/20 transition-colors"
-                        >
-                          <TableCell className="font-bold text-center">
-                            {indexOfFirstPlayer + index + 1}
-                          </TableCell>
-                          <TableCell className="flex items-center gap-2">
-                            <FiUser className="text-game-blue" />
-                            {player.fullName}
-                          </TableCell>
-                          <TableCell className="flex items-center gap-2">
-                            <FaGamepad className="text-game-accent" />
-                            {player.inGameName}
-                          </TableCell>
-                          <TableCell className="font-mono text-sm">
-                            {player.uid}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
+  {currentPlayers.map((player, index) => (
+    <TableRow 
+      key={player.id} 
+      className="hover:bg-game-blue-dim/20 transition-colors"
+    >
+      <TableCell className="font-bold text-center">
+        {indexOfFirstPlayer + index + 1}
+      </TableCell>
+      <TableCell className="flex items-center gap-2">
+        <FiUser className="text-game-blue" />
+        <span>{player.fullName}</span>
+      </TableCell>
+      <TableCell>
+        <div className="flex items-center gap-2">
+          <FaGamepad className="text-game-accent" />
+          <span>{player.inGameName}</span>
+        </div>
+      </TableCell>
+      <TableCell className="font-mono text-sm">
+        {player.uid}
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+
                   </Table>
                 </div>
 
