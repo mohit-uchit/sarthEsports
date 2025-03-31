@@ -1,89 +1,12 @@
 [
   {
-    "playerName": "test",
-    "inGameName": "estet",
-    "uid": "1234567890",
-    "rulesAgreement": true,
-    "id": 1
-  },
-  {
     "fullName": "Mohit Uchit",
     "inGameName": "estet",
     "uid": "32423342777",
     "email": "deadsec.darky@gmail.com",
     "phone": "9466775477",
     "agreement": true,
-    "id": 2,
+    "id": 1,
     "registeredAt": "2025-03-29T07:07:52.009Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "deadsec.darky@gmail.com",
-    "phone": "9466073681",
-    "agreement": true,
-    "id": 3,
-    "registeredAt": "2025-03-29T07:23:52.177Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "official.mohit.uchit@gmail.com",
-    "phone": "9466073681",
-    "agreement": true,
-    "id": 4,
-    "registeredAt": "2025-03-29T13:43:31.947Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "newt60420@gmail.com",
-    "phone": "9466775477",
-    "agreement": true,
-    "id": 5,
-    "registeredAt": "2025-03-29T14:06:07.609Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "official.mohit.uchit@gmail.com",
-    "phone": "9466775477",
-    "agreement": true,
-    "id": 6,
-    "registeredAt": "2025-03-29T14:07:54.214Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "official.mohit.uchit@gmail.com",
-    "phone": "9466775477",
-    "agreement": true,
-    "id": 7,
-    "registeredAt": "2025-03-29T14:09:32.345Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "official.mohit.uchit@gmail.com",
-    "phone": "9466775477",
-    "agreement": true,
-    "id": 8,
-    "registeredAt": "2025-03-29T14:11:57.165Z"
-  },
-  {
-    "fullName": "Mohit Uchit",
-    "inGameName": "estet",
-    "uid": "32423342777",
-    "email": "deadsec.darky@gmail.com",
-    "phone": "9466073681",
-    "agreement": true,
-    "id": 9,
-    "registeredAt": "2025-03-29T14:21:23.222Z"
   }
 ]
