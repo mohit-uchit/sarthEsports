@@ -11,17 +11,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertPlayerSchema.parse(req.body);
       const player = await storage.registerPlayer(validatedData);
-      let emailSent = false;
+      let notificationSent = false;
+      
       try {
-        if (process.env.SMTP_HOST && process.env.SMTP_USER) {
-          emailSent = await sendRegistrationConfirmation(player);
-        } else {
-          console.log("SMTP environment variables not configured, skipping email");
+        // Use Telegram notification instead of email
+        notificationSent = await sendRegistrationConfirmation(player);
+        if (!notificationSent) {
+          console.log("Failed to send Telegram notification, but registration was successful");
         }
-      } catch (emailError) {
-        console.error("Failed to send confirmation email:", emailError);
+      } catch (notificationError) {
+        console.error("Failed to send Telegram notification:", notificationError);
       }
-      res.status(201).json({ message: "Registration successful", player, emailSent });
+      
+      res.status(201).json({ 
+        message: "Registration successful", 
+        player, 
+        notificationSent // renamed from emailSent to reflect the change
+      });
     } catch (error) {
       if (error instanceof ZodError) {
         res.status(400).json({ message: "Validation error", errors: error.errors });

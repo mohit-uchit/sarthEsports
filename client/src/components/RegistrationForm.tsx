@@ -403,64 +403,58 @@ export default function RegistrationForm() {
 
       {/* Success Modal */}
       <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
-        <DialogContent className="bg-gray-900 border border-cyan-900/50 text-white">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-cyan-400">Registration Successful!</DialogTitle>
-            <DialogDescription className="text-gray-300">
-              You've successfully registered for the Free Fire Bermuda Solo Tournament.
-            </DialogDescription>
-          </DialogHeader>
-          
-          {registeredPlayer && (
-            <div className="bg-black/50 p-4 rounded-md border border-cyan-900/30 mt-4">
-              <h4 className="text-white font-medium mb-2">Registration Details</h4>
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <p className="text-gray-400">Name:</p>
-                  <p className="text-white">{registeredPlayer.fullName}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">In-Game Name:</p>
-                  <p className="text-white">{registeredPlayer.inGameName}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">Registration ID:</p>
-                  <p className="text-cyan-400 font-mono">{registeredPlayer.registrationId}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">UID:</p>
-                  <p className="text-white">{registeredPlayer.uid}</p>
-                </div>
-              </div>
-            </div>
-          )}
-          
-          <div className="bg-cyan-900/20 p-4 rounded-md text-sm text-gray-300 mt-2">
-            <p>
-              <span className="text-cyan-400 font-bold">Important:</span> Please save your 
-              registration ID for reference. 
-              {emailSent ? (
-                <span className="text-green-400 block mt-2">
-                  ✓ Confirmation email sent to your registered email address.
-                </span>
-              ) : (
-                <span className="text-yellow-400 block mt-2">
-                  ⚠️ Confirmation email could not be sent. You'll still receive WhatsApp updates.
-                </span>
-              )}
-            </p>
+  <DialogContent className="bg-gray-900 border border-cyan-900/50 text-white">
+    <DialogHeader>
+      <DialogTitle className="text-2xl font-bold text-cyan-400">Registration Successful!</DialogTitle>
+      <DialogDescription className="text-gray-300">
+        You've successfully registered for the Free Fire Bermuda Solo Tournament.
+      </DialogDescription>
+    </DialogHeader>
+    
+    {registeredPlayer && (
+      <div className="bg-black/50 p-4 rounded-md border border-cyan-900/30 mt-4">
+        <h4 className="text-white font-medium mb-2">Registration Details</h4>
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <p className="text-gray-400">Name:</p>
+            <p className="text-white">{registeredPlayer.fullName}</p>
           </div>
-          
-          <DialogFooter>
-            <Button 
-              onClick={() => setShowSuccessModal(false)}
-              className="bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600"
-            >
-              Got it!
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          <div>
+            <p className="text-gray-400">In-Game Name:</p>
+            <p className="text-white">{registeredPlayer.inGameName}</p>
+          </div>
+          <div>
+            <p className="text-gray-400">Registration ID:</p>
+            <p className="text-cyan-400 font-mono">{registeredPlayer.registrationId}</p>
+          </div>
+          <div>
+            <p className="text-gray-400">UID:</p>
+            <p className="text-white">{registeredPlayer.uid}</p>
+          </div>
+        </div>
+      </div>
+    )}
+    
+    <div className="bg-cyan-900/20 p-4 rounded-md text-sm text-gray-300 mt-2">
+      <p>
+        <span className="text-cyan-400 font-bold">Important:</span> Please save your 
+        registration ID for reference. 
+        <span className="text-green-400 block mt-2">
+          ✓ You will receive details on your mail shortly.
+        </span>
+      </p>
+    </div>
+    
+    <DialogFooter>
+      <Button 
+        onClick={() => setShowSuccessModal(false)}
+        className="bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600"
+      >
+        Got it!
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
     </section>
   );
 }
