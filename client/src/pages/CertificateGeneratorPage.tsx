@@ -613,7 +613,7 @@ export default function CertificateGeneratorPage() {
                           <p className="text-gray-300 mb-6 max-w-md">
                             has participated in the Free Fire Bermuda Solo
                             Tournament organized by Sarth Esports on{' '}
-                            <span className="text-[#FF5722]">6 April 2025</span>
+                            <span className="text-[#FF5722]">13 April 2025</span>
                             .
                           </p>
 
@@ -674,7 +674,7 @@ export default function CertificateGeneratorPage() {
                           <div className="w-full flex justify-between mt-4 text-sm">
                             <div className="text-center">
                               <p className="text-[#00E5FF]">QUALIFIERS</p>
-                              <p className="text-gray-400">5 April 2025</p>
+                              <p className="text-gray-400">12 April 2025</p>
                             </div>
 
                             <div className="text-center relative">
@@ -693,7 +693,7 @@ export default function CertificateGeneratorPage() {
 
                             <div className="text-center">
                               <p className="text-[#00E5FF]">FINALS</p>
-                              <p className="text-gray-400">6 April 2025</p>
+                              <p className="text-gray-400">13 April 2025</p>
                             </div>
                           </div>
                         </div>

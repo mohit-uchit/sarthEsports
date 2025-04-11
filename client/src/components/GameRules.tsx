@@ -58,8 +58,8 @@ export default function GameRules() {
       title: 'Timing & Schedule',
       icon: <Clock className="h-6 w-6 text-cyan-400" />,
       rules: [
-        'Qualifiers: April 5, 2025 - 7:00 PM IST',
-        'Finals: April 6, 2025 - 8:00 PM IST',
+        'Qualifiers: April 12, 2025 - 7:00 PM IST',
+        'Finals: April 13, 2025 - 8:00 PM IST',
         'Each match has a maximum duration of 40 minutes',
         'Check-in required 15 minutes before each match',
         'Results will be announced within 30 minutes after finals',

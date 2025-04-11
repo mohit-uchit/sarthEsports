@@ -750,7 +750,7 @@ export default function TournamentDetails() {
                     REGISTRATION
                   </h4>
                   <p className="text-gray-300 mb-3 font-rajdhani">
-                    March 29 - April 02, 2025
+                    April 10 - April 11, 2025
                   </p>
                   <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#FF5722]/20 rounded-full border border-[#FF5722]/40">
                     <motion.span
@@ -817,7 +817,7 @@ export default function TournamentDetails() {
                     QUALIFIERS
                   </h4>
                   <p className="text-gray-300 mb-3 font-rajdhani">
-                    April 05, 2025
+                    April 12, 2025
                   </p>
                   <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/20">
                     <span className="text-white text-sm">Coming Soon</span>
@@ -879,7 +879,7 @@ export default function TournamentDetails() {
                     FINALS
                   </h4>
                   <p className="text-gray-300 mb-3 font-rajdhani">
-                    April 06, 2025
+                    April 13, 2025
                   </p>
                   <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#FF5722]/10 rounded-full border border-[#FF5722]/20">
                     <span className="text-white text-sm">Coming Soon</span>
